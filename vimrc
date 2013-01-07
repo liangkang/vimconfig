@@ -17,8 +17,8 @@ Bundle 'kien/ctrlp.vim'
 " vim-scripts repos
 Bundle 'matchit.zip'
 Bundle 'mru.vim'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
 " non github repos
 " vundle end
 filetype plugin indent on
@@ -34,7 +34,7 @@ set backspace=indent,eol,start
 set whichwrap+=<,>
 set autoread
 if has('mouse')
-  set mouse=a
+  set mouse=nvi
 endif
 if has('unnamedplus')
   set clipboard=unnamedplus
@@ -50,7 +50,7 @@ if &term =~? "xterm" || &term =~? "256"
   syntax on
   set background=light
   set t_Co=256
-  "colorscheme highterm_trans
+  colorscheme highterm_trans
   set hlsearch
 endif
 
@@ -80,9 +80,10 @@ set autoindent
 set smartindent
 
 " complete
-"set wildmode=full
+set wildmode=longest:full,full
 set wildmenu
 set wildignorecase
+set tags+=../tags,../../tags,../../../tags,../../../../tags
 
 " window
 set hidden
@@ -96,8 +97,13 @@ augroup END
 autocmd FileType text setlocal textwidth=78
 autocmd FileType Makefile set noexpandtab
 
+" fold
+set foldclose=all
+
 " map
 nmap <Leader>b :ls<CR>:b
+nmap <Leader>nl :nohl<CR>
+nnoremap <silent> <CR> <CR>:nohl<CR>
 
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -115,3 +121,6 @@ let g:EnhCommentifyRespectIndent = "Yes"
 
 " ZoomWin
 nmap <unique> <c-w><c-o>  <Plug>ZoomWin
+
+" FuzzyFinder
+let g:fuf_enumeratingLimit=1000
